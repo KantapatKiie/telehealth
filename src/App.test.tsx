@@ -1,8 +1,9 @@
 // src/App.test.tsx
 import '@testing-library/jest-dom';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { beforeEach, afterEach, test, expect, vi } from 'vitest';
 import App from './App';
+import { render } from '@testing-library/react';
+import { screen, fireEvent, waitFor } from '@testing-library/dom';
 
 // ✅ Mock fetch
 beforeEach(() => {
