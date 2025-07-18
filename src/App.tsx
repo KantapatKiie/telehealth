@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent } from 'react';
+import './index.css';
 
 type Task = {
   id: number;
@@ -47,7 +48,7 @@ function App() {
       });
       if (!res.ok) throw new Error('Failed to add task');
       setTitle('');
-      fetchTasks();
+      await fetchTasks();
     } catch (err: any) {
       setError(err.message || 'Error adding task');
     } finally {
@@ -84,9 +85,10 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-white flex flex-col items-center py-12 px-4">
       <div className="bg-white shadow-2xl rounded-xl p-8 w-full max-w-2xl">
-        <h1 className="text-4xl font-bold text-blue-700 text-center mb-8">📝 Task Manager</h1>
+        <h1 className="text-4xl font-bold text-blue-700 text-center mb-8" style={{ padding: 12, fontWeight: "bold" }}>📝 TeleHealth Task Manager (Vite + Tailwind!)</h1>
 
         <form onSubmit={handleAdd} className="flex items-center gap-3 mb-6">
+
           <input
             className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             type="text"
@@ -94,11 +96,29 @@ function App() {
             value={title}
             onChange={e => setTitle(e.target.value)}
             disabled={adding}
+            style={{ margin: 12, fontWeight: "bold", borderRadius: "8px", padding: "4px", fontSize: "16px", border: "1px solid #ccc" }}
           />
           <button
             type="submit"
             className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg transition disabled:opacity-50"
             disabled={adding}
+            style={{
+              backgroundColor: adding ? '#2563eb' : '#2563eb',
+              opacity: adding ? 0.5 : 1,
+              cursor: adding ? 'not-allowed' : 'pointer',
+              color: 'white',
+              fontWeight: '600',
+              padding: '0.35rem 1rem',
+              borderRadius: '0.5rem',
+              transition: 'background-color 0.3s ease',
+              marginRight: '12px',
+            }}
+            onMouseEnter={e => {
+              if (!adding) e.currentTarget.style.backgroundColor = '#1d4ed8';
+            }}
+            onMouseLeave={e => {
+              if (!adding) e.currentTarget.style.backgroundColor = '#2563eb';
+            }}
           >
             {adding ? 'Adding...' : 'Add'}
           </button>
@@ -118,8 +138,9 @@ function App() {
                   key={task.id}
                   className={`flex items-center justify-between bg-gray-50 border rounded-lg p-4 shadow-sm hover:shadow-md transition ${task.completed ? 'opacity-60' : ''
                     }`}
+                  style={{ margin: 4, padding: 4, borderRadius: '8px' }}
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3" style={{ margin: 8 }}>
                     <input
                       type="checkbox"
                       checked={task.completed}
@@ -134,6 +155,7 @@ function App() {
                     className="text-red-500 hover:text-red-700 text-xl"
                     onClick={() => deleteTask(task.id)}
                     aria-label="Delete task"
+                    style={{ fontSize: '20px', fontWeight: 'bold', marginRight: '12px' }}
                   >
                     &times;
                   </button>
