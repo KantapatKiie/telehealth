@@ -1,11 +1,12 @@
 // src/App.test.tsx
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { beforeEach, afterEach, test, expect, vi } from 'vitest';
 import App from './App';
 
 // ✅ Mock fetch
 beforeEach(() => {
-    globalThis.fetch = vi.fn().mockImplementation((url, options) => {
+    globalThis.fetch = vi.fn().mockImplementation((_, options) => {
         if (options?.method === 'POST') {
             return Promise.resolve({
                 ok: true,
