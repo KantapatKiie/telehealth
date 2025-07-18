@@ -83,5 +83,6 @@ Frontend runs on [http://localhost:3000](http://localhost:3000).
 ---
 For any issues or questions, feel free to open an issue on GitHub.
 
-
+## Deployment
+cmd : vercel
 Production Vercel : https://telehealth-mdgt4u13d-kantapatkiies-projects.vercel.app/
