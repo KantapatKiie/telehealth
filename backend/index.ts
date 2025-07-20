@@ -9,7 +9,6 @@ interface Task {
 }
 
 const app = express();
-const port = 4000;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -57,6 +56,7 @@ app.delete('/tasks/:id', (req: Request, res: Response) => {
   res.status(204).send();
 });
 
+const port = process.env.PORT || 4000;
 app.listen(port, () => {
   console.log(`Backend server running on http://localhost:${port}`);
 });
